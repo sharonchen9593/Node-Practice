@@ -13,12 +13,19 @@ var fs = require('fs');
 
 // // ** always use async if possible **
 
-var readable = fs.createReadStream(__dirname + '/greet.txt', {encoding: 'utf8', highWaterMark: 16 * 1024}); // highWaterMark is used if we want to custom the size of the chunks
+// var readable = fs.createReadStream(__dirname + '/greet.txt', {encoding: 'utf8', highWaterMark: 16 * 1024}); // highWaterMark is used if we want to custom the size of the chunks
 
-var writable = fs.createWriteStream(__dirname + '/greetcopy.txt')
+// var writable = fs.createWriteStream(__dirname + '/greetcopy.txt')
 
-//stream will fill out the buffer and emit event 'data'
-readable.on('data', function(chunk) {
-  console.log(chunk)
-  writable.write(chunk)
-})
+// //stream will fill out the buffer and emit event 'data'
+// readable.on('data', function(chunk) {
+//   console.log(chunk)
+//   writable.write(chunk) // creates a copy of greet into greetcopy
+// })
+
+
+var readable = fs.createReadStream(__dirname + '/greet.txt');
+
+var writable = fs.createWriteStream(__dirname + '/greetcopy.txt');
+
+readable.pipe(writable);
