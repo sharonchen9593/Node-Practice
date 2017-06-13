@@ -2,10 +2,11 @@ var EventEmitter = require('events');
 var util = require('util');
 
 function Greetr() {
+  EventEmitter.call(this)
   this.greeting = "Hello world!";
 }
 
-util.inherits(Greetr, EventEmitter) // Greeter will have all the methods and properties of EventEmitter
+util.inherits(Greetr, EventEmitter) // Greetr will have all the methods and properties of EventEmitter
 
 Greetr.prototype.greet = function(data) { // can also create own method
   console.log(this.greeting + ": " + data);
